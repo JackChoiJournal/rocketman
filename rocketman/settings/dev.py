@@ -7,10 +7,28 @@ DEBUG = True
 SECRET_KEY = '1m)*b1u&+436bs=8al%2wsow3_)n4$*$&^(scgxp&12d8+$fm2'
 
 # SECURITY WARNING: define the correct hosts in production!
-ALLOWED_HOSTS = ['*'] 
+ALLOWED_HOSTS = ['*']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+INSTALLED_APPS += [
+    'debug_toolbar',
+]
+
+MIDDLEWARE += [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
+CACHES = {
+     "default":{
+         "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+         "LOCATION": os.path.join(BASE_DIR, ".cache"),
+     }
+}
 
 try:
     from .local import *

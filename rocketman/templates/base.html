@@ -1,7 +1,7 @@
 {% load static wagtailuserbar %}
 
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <title>
@@ -18,20 +18,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/rocketman.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
     </head>
 
-    <body class="{% block body_class %}{% endblock %}">
+    <body>
         {% wagtailuserbar %}
 
-        {% block content %}{% endblock %}
+        {% include "includes/header.html" %}
+
+        {% block banner %}{% endblock banner %}
+
+        <main id="content" class="container my-4" role="main">
+          {% block content %}{% endblock %}
+        </main>
+
+        {% include 'includes/footer.html' %}
 
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/rocketman.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
